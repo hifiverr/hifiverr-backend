@@ -13,17 +13,18 @@ CREATE TABLE `users` (
   `skills` varchar(255),
   `location` varchar(150),
   `primary_language` varchar(150),
-  `profile_image` varchar(255)
+  `profile_image` varchar(255),
+  `about_me` varchar(1500)
 );
 
 CREATE TABLE `events` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_id` int,
   `link` varchar(255),
   `event_title` varchar(200),
   `event_date` datetime,
-  `event_content` varchar(255),
-  `community_id` int
+  `event_content` varchar(1000),
+  `community_id` int,
+  `event_image` varchar(255)
 );
 
 CREATE TABLE `user_events` (
@@ -46,14 +47,16 @@ CREATE TABLE `posts` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int,
   `community_id` int,
-  `post_content` varchar(255)
+  `post_content` varchar(5000),
+  `created_at` timestamp
 );
 
 CREATE TABLE `comments` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int,
   `post_id` int,
-  `comment` varchar(255)
+  `comment` varchar(350),
+  `created_at` timestamp
 );
 
 ALTER TABLE `community_users` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
