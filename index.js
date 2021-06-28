@@ -10,6 +10,7 @@ const usersRouter = require("./routes/users.route");
 const communityRouter = require("./routes/community.route");
 const eventsRouter = require("./routes/events.route");
 const commentsRouter = require("./routes/comments.route");
+const postsRouter = require("./routes/posts.route");
 
 connection.connect((err) => {
   err
@@ -24,6 +25,7 @@ app.use("/communities", communityRouter);
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 app.use("/comments", commentsRouter);
+app.use("/posts", postsRouter);
 
 app.listen(port, (err) => {
   err ? console.log(err) : console.log(`App is running at port ${port}.`);
