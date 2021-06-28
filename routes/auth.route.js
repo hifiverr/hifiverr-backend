@@ -14,6 +14,7 @@ router.post("/register", (req, res) => {
     location,
     primary_language,
     profile_image,
+    about_me,
   } = req.body;
 
   if (!email || !password) {
@@ -31,6 +32,7 @@ router.post("/register", (req, res) => {
       location,
       primary_language,
       profile_image,
+      about_me,
     };
 
     connection.query(`INSERT INTO users SET ?`, [userInfo], (error, result) => {
