@@ -6,7 +6,7 @@ router.get("/:community_id", (req, res) => {
   const communityId = req.params.community_id;
 
   connection.query(
-    "SELECT * FROM events WHERE community_id = ?",
+    "SELECT events.*, users.profile_image, users.firstname, users.lastname FROM events JOIN users ON users.id = events.user_id WHERE community_id = ?",
     [communityId],
     (err, eventsByCommunityIdResults) => {
       if (err) res.status(500).json(err);

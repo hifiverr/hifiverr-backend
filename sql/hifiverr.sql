@@ -8,23 +8,24 @@ CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `firstname` varchar(150),
   `lastname` varchar(150),
-  `email` varchar(150) UNIQUE NOT NULL,
-  `password` varchar(255) UNIQUE NOT NULL,
-  `skills` varchar(255),
+  `email` varchar(200) UNIQUE NOT NULL,
+  `password` varchar(300) UNIQUE NOT NULL,
+  `skills` varchar(1000),
   `location` varchar(150),
   `primary_language` varchar(150),
   `profile_image` varchar(5000),
-  `about_me` varchar(1500)
+  `about_me` varchar(5000)
 );
 
 CREATE TABLE `events` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `link` varchar(255),
+  `link` varchar(5000),
   `event_title` varchar(200),
   `event_date` datetime,
   `event_content` varchar(1000),
   `community_id` int,
-  `event_image` varchar(5000)
+  `event_image` varchar(5000),
+  `user_id` int
 );
 
 CREATE TABLE `user_events` (
@@ -55,7 +56,7 @@ CREATE TABLE `comments` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int,
   `post_id` int,
-  `comment` varchar(350),
+  `comment` varchar(1500),
   `created_at` timestamp
 );
 
@@ -76,3 +77,5 @@ ALTER TABLE `comments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 ALTER TABLE `user_events` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_events` ADD FOREIGN KEY (`event_id`) REFERENCES `events` (`id`);
+
+ALTER TABLE `events` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);

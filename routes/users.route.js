@@ -55,4 +55,12 @@ router.get("/:id", (req, res) => {
   );
 });
 
+// GET /users
+router.get("/", (req, res) => {
+  connection.query("SELECT * FROM users", (err, usersSelectResult) => {
+    if (err) res.status(500).json(err);
+    else res.status(200).json(usersSelectResult);
+  });
+});
+
 module.exports = router;
