@@ -34,4 +34,25 @@ router.put("/:id", (req, res) => {
   );
 });
 
+// GET /users/:id
+router.get("/:id", (req, res) => {
+  const userId = req.params.id;
+
+  connection.query(
+    "SELECT * FROM users WHERE id = ?",
+    [userId],
+    (err, userSelectResult) => {
+      if (err) res.status(500).json(err);
+      else {
+        if (userSelectResult.length) {
+          res.status(200).json(userSelectResult[0]);
+        } else
+          res
+            .status(404)
+            .json({ errorMessage: `User with id ${userId} not found.` });
+      }
+    }
+  );
+});
+
 module.exports = router;
