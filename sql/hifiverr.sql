@@ -13,7 +13,7 @@ CREATE TABLE `users` (
   `skills` varchar(255),
   `location` varchar(150),
   `primary_language` varchar(150),
-  `profile_image` varchar(255),
+  `profile_image` varchar(5000),
   `about_me` varchar(1500)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE `events` (
   `event_date` datetime,
   `event_content` varchar(1000),
   `community_id` int,
-  `event_image` varchar(255)
+  `event_image` varchar(5000)
 );
 
 CREATE TABLE `user_events` (
@@ -35,7 +35,7 @@ CREATE TABLE `user_events` (
 CREATE TABLE `community` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(200),
-  `image` varchar(255)
+  `image` varchar(5000)
 );
 
 CREATE TABLE `community_users` (

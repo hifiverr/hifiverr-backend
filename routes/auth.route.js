@@ -14,6 +14,7 @@ router.post("/register", (req, res) => {
     location,
     primary_language,
     profile_image,
+    about_me,
   } = req.body;
 
   if (!email || !password) {
@@ -31,6 +32,7 @@ router.post("/register", (req, res) => {
       location,
       primary_language,
       profile_image,
+      about_me,
     };
 
     connection.query(`INSERT INTO users SET ?`, [userInfo], (error, result) => {
@@ -66,8 +68,7 @@ router.post("/login", (req, res) => {
         } else if (bcrypt.compareSync(password, result[0].password)) {
           // Passwords match
           const user = {
-            id: result[0].id,
-            email,
+            ...result[0],
             password: "hidden",
           };
           const token = jwt.sign(
