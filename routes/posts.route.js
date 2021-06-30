@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
         const postId = insertedPostResult.insertId;
 
         connection.query(
-          "SELECT posts.*, users.profile_image FROM posts JOIN users ON users.id = posts.user_id WHERE posts.id = ?",
+          "SELECT posts.*, users.profile_image, users.id AS user_id FROM posts JOIN users ON users.id = posts.user_id WHERE posts.id = ?",
           [postId],
           (err, postSelectResult) => {
             if (err) res.status(500).json(err);
@@ -50,6 +50,26 @@ router.get("/:id/comments", (req, res) => {
     (err, postSelectResult) => {
       if (err) res.status(500).json(err);
       else res.status(200).json(postSelectResult);
+    }
+  );
+});
+
+// GET /posts/:id
+router.get("/:id", (req, res) => {
+  const postId = req.params.id;
+
+  connection.query(
+    "SELECT * FROM posts WHERE id = ?",
+    [postId],
+    (err, postSelectResult) => {
+      if (err) res.status(500).json(err);
+      else {
+        if (postSelectResult.length) res.status(200).json(postSelectResult[0]);
+        else
+          res
+            .status(404)
+            .json({ errorMessage: `Post with the id ${postId} not found.` });
+      }
     }
   );
 });
