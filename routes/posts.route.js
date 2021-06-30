@@ -17,6 +17,7 @@ router.post("/", (req, res) => {
           "SELECT posts.*, users.profile_image, users.id AS user_id FROM posts JOIN users ON users.id = posts.user_id WHERE posts.id = ?",
           [postId],
           (err, postSelectResult) => {
+            console.log(postSelectResult);
             if (err) res.status(500).json(err);
             else res.status(200).json(postSelectResult[0]);
           }
